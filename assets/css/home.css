@@ -1,0 +1,137 @@
+/* ===========================
+   HOME (compacta por padrão)
+   =========================== */
+
+/* Header da Home */
+header.container { margin-bottom: 1rem; }
+
+/* Logo menor */
+.logo-inline img {
+  height: 20px;       /* ajuste principal */
+  width: auto;
+}
+
+/* Saudação */
+#greeting { font-size: 14.5px; }
+
+/* Avatar (herda estilos do styles.css; aqui só reduz) */
+.avatar, .avatar-text{
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+
+/* Cartão de pontos (usa .card-soft do styles.css) */
+.points-line { display: flex; align-items: center; gap: 6px; }
+.points-line #btnTogglePoints { cursor: pointer; }
+.points-value {font-weight: 800; }   /* reduzido */
+.level-strong {font-weight: 800; }   /* reduzido */
+
+/* Atalhos */
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;                                 /* menor */
+}
+.shortcut {
+  text-decoration: none;
+  color: #111827;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;                                  /* menor */
+  padding: 6px;                              /* menor */
+}
+.shortcut-ico {
+  width: 40px; height: 40px;                 /* menor */
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 18px;                           /* menor */
+}
+.shortcut-txt { font-weight: 600; font-size: 12.5px; color: #6b7280; }
+.bg-blue { background: #e8f0ff; color: #2563eb; }
+.bg-mint { background: #e6fffb; color: #06b6d4; }
+.bg-rose { background: #ffe9ec; color: #ef4444; }
+.bg-sand { background: #fff4e5; color: #f59e0b; }
+
+/* Missões */
+.mission {
+  border: 2px solid #d1d5db;
+  border-radius: 16px;                        /* menor */
+  padding: 12px;                              /* menor */
+  background: #fff;
+}
+.mission-head { display: flex; justify-content: space-between; align-items: center; }
+.mission-chip {
+  background: #f3f4f6; color: #9ca3af; font-weight: 800; letter-spacing: .02em;
+  padding: 5px 8px;                           /* menor */
+  border-radius: 10px;
+  font-size: 12px;                            /* menor */
+}
+.btn-accept {
+  background: var(--brand); color: #fff; border: 0; border-radius: 999px;
+  padding: 6px 12px;                          /* menor */
+  font-weight: 700; font-size: 14px;          /* menor */
+}
+.btn-accept:hover { background: var(--brand-dark); color: #fff; }
+.mission-title { font-size: 20px; font-weight: 800; margin: 6px 0 4px; } /* menor */
+.mission-desc { color: #9ca3af; margin: 0 0 6px; font-size: 13px; }      /* menor */
+.mission-points { font-weight: 800; font-size: 14px; }                   /* menor */
+
+/* Estado vazio das missões */
+.empty-state {
+  padding: 16px;
+  border-radius: 16px;
+}
+.empty-emoji {
+  font-size: 32px;      /* menor */
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+/* Toast (feedback de missão concluída) */
+.mission-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 88px; /* fica acima da bottom-nav */
+  transform: translateX(-50%) translateY(12px);
+  background: #111827;
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 14px;                    /* menor */
+  font-weight: 700;
+  font-size: 13px;                      /* menor */
+  opacity: 0;
+  transition: all .25s ease;
+  z-index: 2000;
+}
+.mission-toast.show {
+  opacity: 0.95;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===========================
+   Responsividade
+   =========================== */
+
+/* Tablets e acima (podemos “soltar” um pouco o tamanho) */
+@media (min-width: 768px){
+  .points-value { font-size: 32px; }
+  .mission-title { font-size: 22px; }
+}
+
+/* iPhone 15/17 (≈393px) — garantir compacidade */
+@media (max-width: 410px){
+  header.container { margin-bottom: .8rem; }
+  #greeting{ font-size: 14px !important; }
+  .points-value{ font-size: 22px !important; }
+  .level-strong{ font-size: 20px !important; }
+  .shortcut-txt{ font-size: 12px !important; }
+}
+
+/* Androids menores / iPhone SE */
+@media (max-width: 360px){
+  .points-value{ font-size: 22px !important; }
+  .mission-title{ font-size: 18px !important; }
+  .btn-accept{ font-size: 3px !important; padding: 5px 10px !important; }
+}

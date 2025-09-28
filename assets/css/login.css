@@ -1,0 +1,67 @@
+/* Estrutura base da página de login */
+.login-shell {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+}
+.login-phone { max-width: 420px; width: 100%; margin: 0 auto; padding-bottom: 2rem; }
+
+/* Hero e logo */
+.login-hero { width: 220px; margin-top: 8px; height: auto; }
+.logo-stack {
+  display: flex; align-items: center; justify-content: center;
+  gap: .35rem; font-size: 28px; margin-top: 6px;
+}
+.logo-mark { color: var(--brand); font-weight: 700; }
+.logo-text { color: #111827; font-weight: 600; }
+.login-sub {
+  max-width: 26ch; margin: 8px auto 0;
+  color: #4b5563; font-size: 14px; text-align: center;
+}
+
+/* Título */
+.login-title { font-size: 26px; font-weight: 700; margin: 22px 0 14px; }
+
+/* Campos */
+.sr-label {
+  display: block; font-size: 11px; letter-spacing: .02em;
+  font-weight: 700; color: #9ca3af; margin-bottom: 6px;
+}
+.sr-input {
+  height: 52px; border-radius: 10px; background: #fff; border: 1px solid var(--border-soft);
+}
+.sr-input:focus { border-color: #cbd5e1; box-shadow: none; }
+
+/* Olho da senha */
+.sr-eye {
+  position: absolute; right: 12px; top: 36px;
+  border: 0; background: transparent; color: #9ca3af; padding: 6px;
+}
+.sr-eye:hover { color: #6b7280; }
+
+/* Link Esqueceu Senha */
+.sr-link { color: var(--brand); text-decoration: none; font-size: 14px; }
+.sr-link:hover { color: var(--brand-dark); text-decoration: underline; }
+
+/* Botão Entrar */
+.sr-btn {
+  background: var(--brand); color: #fff; border: none; border-radius: 999px;
+  padding: 14px 40px; font-weight: 700; font-size: 18px;
+}
+.sr-btn:hover { background: var(--brand-dark); color: #fff; }
+.sr-btn:focus { box-shadow: none; }
+
+/* Responsividade login */
+@media (min-width: 576px) {
+  .login-phone { max-width: 500px; }
+  .login-hero { width: 240px; }
+}
+@media (min-width: 768px) {
+  .login-phone { max-width: 560px; }
+  .login-title { font-size: 28px; }
+  .sr-input { height: 54px; font-size: 15px; }
+  .sr-btn { font-size: 18px; padding: 15px 44px; }
+}
+@media (min-width: 1200px) {
+  .login-phone { max-width: 640px; }
+  .login-hero { width: 300px; }
+}

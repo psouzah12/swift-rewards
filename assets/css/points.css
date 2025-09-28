@@ -1,0 +1,51 @@
+/* Header da página (opcional) */
+header.container { margin-bottom: 1.5rem; }
+
+/* Saldo / pontos (usa card-soft do styles.css) */
+.label-muted { color: #9ca3af; font-weight: 700; letter-spacing: .02em; }
+.points-line { display: flex; align-items: center; gap: 6px; }
+.points-line #btnTogglePoints { cursor: pointer; }
+.points-value { font-size: 24px; font-weight: 800; }
+
+.level-badge {
+  background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa;
+  padding: 6px 10px; border-radius: 999px; font-weight: 700; font-size: 12px;
+}
+
+/* Recompensa */
+.reward {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; background: #fff; border: 2px solid #e5e7eb;
+  border-radius: 16px; padding: 12px 14px;
+}
+.reward-left { display: flex; align-items: center; gap: 12px; }
+
+/* Miniatura como background para cobrir e recortar bordas transparentes */
+.reward-thumb {
+  width: 64px; height: 64px; border-radius: 12px;
+  background-color: #f3f4f6;
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  border: 1px solid #eef2f7;
+}
+
+.reward-title { font-weight: 700; }
+.reward-sub { color: #9ca3af; font-size: 14px; }
+.reward-cost { font-weight: 600; margin-top: 2px; }
+
+.btn-redeem {
+  background: var(--brand); color: #fff; border: 0; border-radius: 999px;
+  padding: 8px 16px; font-weight: 700;
+}
+.btn-redeem:hover { background: var(--brand-dark); color: #fff; }
+
+/* Histórico */
+.history-item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 10px 12px;
+}
+.history-title { font-weight: 700; }
+.history-when { color: #9ca3af; font-size: 13px; }
+.history-points { color: #ef4444; font-weight: 800; }
+
+/* Responsivo Points */
+@media (min-width: 768px){ .points-value { font-size: 40px; } }

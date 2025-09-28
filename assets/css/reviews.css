@@ -1,0 +1,27 @@
+/* Header da página (opcional) */
+header.container { margin-bottom: 1.5rem; }
+
+/* Cartão de avaliação */
+.review-card{
+  background: #fff;
+  border: 2px solid #d1d5db;
+  border-radius: 20px;
+  padding: 14px 16px;
+}
+.review-score { font-weight: 800; }
+.review-text  { color: #6b7280; line-height: 1.45; }
+
+.stars { display: flex; gap: 2px; }
+.stars i { font-size: 16px; color: #f59e0b; } /* amarelo dourado */
+
+/* Botão de carregar mais */
+.btn-more{
+  background: var(--brand);
+  color: #fff; border: 0; border-radius: 999px;
+  padding: 10px 18px; font-weight: 700;
+}
+.btn-more:hover{ background: var(--brand-dark); color: #fff; }
+
+/* Responsivo Reviews */
+@media (min-width: 768px){ .review-card{ padding: 16px 18px; } }
+@media (min-width: 1200px){ .container { max-width: 980px; } }

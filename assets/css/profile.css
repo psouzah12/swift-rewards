@@ -1,0 +1,49 @@
+/* Header da página (opcional) */
+header.container { margin-bottom: 1.5rem; }
+
+/* Avatar do perfil (usa avatar-text/avatar-img do styles.css)
+   Aqui apenas garantimos o tamanho maior do perfil */
+.avatar { width: 70px; height: 70px; font-size: 18px; }
+
+/* Editar Perfil (texto do botão sob o nome) */
+.btn.btn-link.text-secondary.small {
+  font-size: 13px !important;  /* tamanho reduzido */
+  font-weight: 500 !important;   /* peso mais leve e moderno */
+  color: #9ca3af !important;     /* cinza neutro */
+  text-decoration: none !important;
+  margin-top: 2px;               /* pequeno espaçamento do nome */
+  transition: color 0.25s ease;
+}
+
+.btn.btn-link.text-secondary.small:hover {
+  color: var(--brand) !important; /* cor da marca ao passar o dedo/mouse */
+}
+
+/* Cartão de métricas */
+.metrics-card{
+  background: #f3f7fb;
+  border: 1px solid #e5eef6;
+  border-radius: 16px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.metric { text-align: center; }
+.metric-label { color: #6b7280; font-weight: 600; font-size: 12px;}
+.metric-value { color: #1d4ed8; font-weight: 800; font-size: 28px; }
+
+/* Lista de configurações */
+.setting-item{
+  padding: 16px 0;
+  border-bottom: 1px solid #eee !important;
+  font-weight: 500; color: #111827;
+}
+.setting-item:last-child{ border-bottom: 0 !important; }
+.setting-item:hover{ background: transparent; color: var(--brand); }
+
+/* Modal pré-visualização de foto (reaproveita avatar-img) */
+#photoPreview.avatar-img { width: 60px; height: 60px; border-radius: 50%; }
+
+/* Responsivo Profile */
+@media (min-width: 1200px){ .container { max-width: 980px; } }
