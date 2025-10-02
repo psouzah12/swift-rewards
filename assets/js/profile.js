@@ -9,7 +9,6 @@ function hueFromString(str){
   let h = 0; for (let i=0;i<str.length;i++) h = (h*31 + str.charCodeAt(i)) >>> 0;
   return h % 360;
 }
-
 function getInitials(fullname){
   if (!fullname) return '?';
   const parts = fullname.trim().split(/\s+/);
@@ -26,7 +25,7 @@ function renderProfile(){
   // Nome
   document.getElementById('profileName').textContent = u.name || 'Colaborador';
 
-  // Avatar: foto (se tiver) OU iniciais (com cor)
+  // Avatar
   const av = document.getElementById('profileAvatar');
   if (!av) return;
 
@@ -90,7 +89,7 @@ document.getElementById('editProfileModal')?.addEventListener('show.bs.modal', (
 photoI?.addEventListener('change', (e) => {
   const file = e.target.files?.[0];
   if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { // 2MB
+  if (file.size > 2 * 1024 * 1024) {
     alert('Arquivo muito grande. Escolha uma imagem até 2MB.');
     photoI.value = '';
     return;
@@ -132,22 +131,13 @@ form?.addEventListener('submit', (e) => {
   Storage.set(updated);
   renderProfile();
 
-  // fechar modal
   const modal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
   modal?.hide();
 });
 
 /* -----------------------
-   Interações básicas
+   Logout
 ------------------------*/
-document.querySelectorAll('.setting-item[data-key]').forEach(a=>{
-  a.addEventListener('click', (e)=>{
-    e.preventDefault();
-    alert(`Abriria a seção: ${a.dataset.key}`);
-  });
-});
-
-// Logout
 document.getElementById('btnLogout')?.addEventListener('click', ()=>{
   if (confirm('Deseja realmente sair?')) {
     Storage.clear();

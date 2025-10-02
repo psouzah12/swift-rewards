@@ -80,7 +80,7 @@ button { cursor: pointer; font-family: inherit; transition: var(--transition-fas
 .btn-more {
   background: var(--brand); color: #fff;
   border: 0; border-radius: 999px;
-  padding: 8px 14px; font-weight: 700;;
+  padding: 11px 11px; font-weight: 700;;
 }
 .btn-pill:hover,
 .btn-redeem:hover,
@@ -90,7 +90,7 @@ button { cursor: pointer; font-family: inherit; transition: var(--transition-fas
    CARTÕES E SEÇÕES (enxutos)
 ---------------------------- */
 .card-soft {
-  border: 2px solid #d1d5db;
+  border: 1px solid #d1d5db;
   border-radius: var(--radius-lg);
   padding: 12px;
   background: #fff;
@@ -191,7 +191,7 @@ header.container { margin-bottom: 1rem; padding-top: var(--safe-top); }
 
   /* Botões */
   .btn-pill, .btn-redeem, .btn-more{
-    padding: 8px 12px !important; font-size: 12px !important;
+    padding: 11px 11px !important; font-size: 12px !important;
   }
 
   /* Bottom nav */

@@ -171,5 +171,189 @@ function renderMissions(){
   });
 }
 
+/* ===========================
+   Notificações – UI + Dados
+   =========================== */
+const Notifs = {
+  key: 'sr_notifs',
+  get(){
+    try {
+      return JSON.parse(localStorage.getItem(this.key)) || [];
+    } catch { return []; }
+  },
+  set(v){ localStorage.setItem(this.key, JSON.stringify(v)); },
+  seedIfEmpty(){
+    const cur = this.get();
+    if (cur.length) return;
+    const now = Date.now();
+    const sample = [
+      { id: 'n1', title: 'Meta semanal batida 🎯', body: 'Parabéns! Você atingiu 120% da meta de vendas da semana. Continue assim!', ts: now - 1000*60*40, read: false },
+      { id: 'n2', title: 'Nova missão disponível', body: 'Missão “Cliente recorrente” liberada. Vale 60 pontos!', ts: now - 1000*60*90, read: false },
+      { id: 'n3', title: 'Resgate confirmado', body: 'Seu “Vale Compras Swift (R$ 100)” foi autorizado. Consulte seu e-mail.', ts: now - 1000*60*60*3, read: true },
+    ];
+    this.set(sample);
+  }
+};
+
+// util: tempo relativo simples
+function timeAgo(ts){
+  const diff = Math.max(1, Math.floor((Date.now() - ts) / 1000)); // s
+  if (diff < 60) return `${diff}s`;
+  const m = Math.floor(diff/60);
+  if (m < 60) return `${m}min`;
+  const h = Math.floor(m/60);
+  if (h < 24) return `${h}h`;
+  const d = Math.floor(h/24);
+  return `${d}d`;
+}
+
+(function notifUI(){
+  const btn = document.getElementById('btnNotif');
+  const panel = document.getElementById('notifPanel');
+  const list = document.getElementById('notifList');
+  const empty = panel?.querySelector('.notif-empty');
+  const btnClose = document.getElementById('btnCloseNotif');
+  const btnMarkAll = document.getElementById('btnMarkAll');
+  const tpl = document.getElementById('tplNotif');
+
+  if (!btn || !panel || !list || !tpl) return;
+
+  // cria seed se não houver nada
+  Notifs.seedIfEmpty();
+
+  function unreadCount(arr){ return arr.filter(n => !n.read).length; }
+  function syncDot(){
+    const dot = btn.querySelector('.notif-dot');
+    const count = unreadCount(Notifs.get());
+    if (dot) dot.style.display = count > 0 ? 'block' : 'none';
+  }
+
+  function render(){
+    const data = Notifs.get().sort((a,b)=> b.ts - a.ts);
+    list.innerHTML = '';
+    if (!data.length){
+      empty.hidden = false;
+      return;
+    }
+    empty.hidden = true;
+
+    data.forEach(n=>{
+      const node = document.importNode(tpl.content, true);
+      const root = node.querySelector('.notif-item');
+      if (n.read) root.classList.add('read');
+      root.dataset.id = n.id;
+
+      root.querySelector('.title').textContent = n.title;
+      root.querySelector('.body').textContent  = n.body;
+      root.querySelector('.meta').textContent  = timeAgo(n.ts);
+
+      // marcar como lida
+      root.querySelector('.btn-read').addEventListener('click', ()=>{
+        const all = Notifs.get();
+        const it = all.find(x=>x.id===n.id);
+        if (it){ it.read = true; Notifs.set(all); }
+        render(); syncDot();
+      });
+
+      // ver/expandir
+root.querySelector('.btn-view').addEventListener('click', ()=>{
+  const titleEl = document.getElementById('notifModalTitle');
+  const bodyEl  = document.getElementById('notifModalBody');
+  titleEl.textContent = n.title;
+  bodyEl.textContent = n.body;
+
+  // marca lida ao abrir
+  const all = Notifs.get();
+  const it = all.find(x=>x.id===n.id);
+  if (it){ it.read = true; Notifs.set(all); }
+  render(); syncDot();
+
+  // 🔒 fecha o painel antes de abrir o modal
+  if (typeof closePanel === 'function') closePanel();
+
+  // abre modal
+  const modal = new bootstrap.Modal(document.getElementById('notifModal'));
+  modal.show();
+});
+
+      list.appendChild(node);
+    });
+  }
+
+// cria overlay com blur
+function createNotifOverlay(){
+  const el = document.createElement('div');
+  el.className = 'notif-overlay';
+  // fechar ao clicar no fundo:
+  el.addEventListener('click', closePanel, { once: true });
+  document.body.appendChild(el);
+  return el;
+}
+
+let _notifOverlay = null;
+
+function openPanel(){
+  if (_notifOverlay) return;                // já aberto
+  _notifOverlay = createNotifOverlay();
+  // ...mostrar painel como você já faz...
+}
+
+function closePanel(){
+  // ...esconder painel como você já faz...
+  if (_notifOverlay){
+    _notifOverlay.remove();
+    _notifOverlay = null;
+  }
+}
+
+  // posiciona painel abaixo do sino
+  function positionPanel(){
+    const r = btn.getBoundingClientRect();
+    const panelW = Math.min(window.innerWidth*0.92, 380);
+    panel.style.right = `${Math.max(8, window.innerWidth - r.right + 6)}px`;
+    panel.style.top   = `${r.bottom + 8}px`;
+    panel.style.width = `${panelW}px`;
+  }
+
+  // abrir/fechar
+  let open = false;
+  function openPanel(){
+    positionPanel();
+    panel.hidden = false;
+    // força reflow para animar
+    panel.getBoundingClientRect();
+    panel.classList.add('show');
+    open = true;
+    document.addEventListener('click', onDocClick, { capture:true });
+    window.addEventListener('resize', positionPanel);
+  }
+  function closePanel(){
+    panel.classList.remove('show');
+    open = false;
+    setTimeout(()=>{ panel.hidden = true; }, 150);
+    document.removeEventListener('click', onDocClick, { capture:true });
+    window.removeEventListener('resize', positionPanel);
+  }
+  function onDocClick(e){
+    if (panel.contains(e.target) || btn.contains(e.target)) return;
+    closePanel();
+  }
+
+  btn.addEventListener('click', (e)=>{
+    e.preventDefault(); // não é link
+    if (open) closePanel(); else openPanel();
+  });
+  btnClose.addEventListener('click', closePanel);
+
+  btnMarkAll.addEventListener('click', ()=>{
+    const all = Notifs.get().map(n => ({...n, read:true}));
+    Notifs.set(all);
+    render(); syncDot();
+  });
+
+  // inicial
+  render(); syncDot();
+})();
+
 // Inicializa a lista
 renderMissions();

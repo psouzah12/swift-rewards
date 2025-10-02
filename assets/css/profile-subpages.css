@@ -1,0 +1,39 @@
+.page-header { margin-bottom: 1rem; }
+.page-header .title { font-weight: 800; }
+
+.section-card{
+  background:#fff;
+  border:1.8px solid #e5e7eb;
+  border-radius:16px;
+  padding:14px;
+}
+
+.field-label{ font-size:12px; color:#6b7280; font-weight:700; letter-spacing:.02em; text-transform:uppercase; }
+.field-value{ font-weight:700; }
+
+.badge-pill{
+  border-radius:999px; padding:6px 10px; font-weight:700; font-size:12px;
+  border:1px solid #e5e7eb; background:#f9fafb;
+}
+
+.grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.trophy { background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; text-align:center; }
+.trophy .emoji{ font-size:26px; line-height:1; }
+.trophy .label{ font-size:12px; color:#6b7280; margin-top:6px; }
+
+.history-item{
+  display:flex; justify-content:space-between; align-items:center;
+  background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:10px 12px;
+}
+.history-left .title{ font-weight:700; }
+.history-left .when{ font-size:13px; color:#9ca3af; }
+.history-right{ font-weight:800; color:#ef4444; }
+
+.pref-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 0; border-bottom:1px solid #eee;
+}
+.pref-row:last-child{ border-bottom:0; }
+
+/* respiro lateral */
+.container { padding-left: 18px; padding-right: 18px; }

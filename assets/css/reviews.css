@@ -4,7 +4,7 @@ header.container { margin-bottom: 1.5rem; }
 /* Cartão de avaliação */
 .review-card{
   background: #fff;
-  border: 2px solid #d1d5db;
+  border: 1px solid #d1d5db;
   border-radius: 20px;
   padding: 14px 16px;
 }

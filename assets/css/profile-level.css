@@ -1,0 +1,56 @@
+/* Card principal */
+.level-card{
+  padding: 14px;
+  border-radius: 18px;
+}
+
+/* Chips (resolvem o corte/“bug”) */
+.chips-wrap{
+  display: flex;
+  flex-wrap: wrap;            /* permite quebrar linha */
+  gap: 8px;                   /* respiro entre chips */
+  overflow: visible;          /* garante que nada seja cortado */
+}
+
+.chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  font-size: 12.5px;
+  color: #111827;
+  white-space: nowrap;        /* mantém o chip compacto */
+}
+.chip .sep{ opacity: .35; }
+
+/* Destaque do nível atual */
+.chip.active{
+  background: #fff7ed;                    /* pêssego claro */
+  border-color: #fed7aa;
+  color: #b45309;                          /* laranja queimado */
+}
+
+/* Barra de progresso */
+.progress-wrap{ width: 100%; }
+.progress-rail{
+  height: 10px;
+  border-radius: 999px;
+  background: #eef2f7;
+  overflow: hidden;
+}
+.progress-bar{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FDBA74, #FB923C); /* laranja suave -> forte */
+  border-radius: 999px;
+  transition: width .45s cubic-bezier(.2,.8,.2,1);
+}
+
+/* Compacta melhor em celulares */
+@media (max-width: 410px){
+  .chip{ padding: 5px 8px; font-size: 12px; }
+  .level-card{ padding: 12px; border-radius: 16px; }
+}

@@ -15,7 +15,7 @@ header.container { margin-bottom: 1.5rem; }
 /* Recompensa */
 .reward {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; background: #fff; border: 2px solid #e5e7eb;
+  gap: 12px; background: #fff; border: 1px solid #e5e7eb;
   border-radius: 16px; padding: 12px 14px;
 }
 .reward-left { display: flex; align-items: center; gap: 12px; }
@@ -48,4 +48,4 @@ header.container { margin-bottom: 1.5rem; }
 .history-points { color: #ef4444; font-weight: 800; }
 
 /* Responsivo Points */
-@media (min-width: 768px){ .points-value { font-size: 40px; } }
+@media (min-width: 768px){ .points-value { font-size: 28px; } }
